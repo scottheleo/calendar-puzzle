@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>日历拼图</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app-controls">
+  <button id="btn-theme" class="icon-btn" title="theme">🌙</button>
+  <button id="btn-lang" class="icon-btn">EN</button>
+</div>
+
+<!-- ===== Setup screen ===== -->
+<section id="screen-setup" class="screen active">
+  <h1 data-i18n="appTitle">日历拼图</h1>
+  <p class="hint-text" data-i18n="setupHint">选择 3 个要露出的格子：1 个月份、1 个日期、1 个星期。</p>
+
+  <div id="setup-board" class="board-wrap"></div>
+
+  <div id="setup-status" class="status"></div>
+
+  <div class="setup-controls">
+    <label class="toggle">
+      <input type="checkbox" id="flip-toggle" checked>
+      <span data-i18n="allowFlip">允许翻面</span>
+    </label>
+  </div>
+
+  <div class="button-row">
+    <button id="btn-viewer" class="btn primary" disabled data-i18n="showAnswer">看答案</button>
+    <button id="btn-play" class="btn primary" disabled data-i18n="play">开始游戏</button>
+  </div>
+
+  <div id="resume-area" class="resume-area"></div>
+  <div id="wins-area" class="resume-area"></div>
+</section>
+
+<!-- ===== Viewer screen (Mode A) ===== -->
+<section id="screen-viewer" class="screen">
+  <div class="topbar">
+    <button class="btn ghost" data-back data-i18n="back">← 返回</button>
+    <span id="viewer-title" class="topbar-title"></span>
+  </div>
+
+  <div class="viewer-nav">
+    <button id="viewer-prev" class="btn ghost" data-i18n="prev">← 上一个</button>
+    <span id="viewer-count" class="viewer-count"></span>
+    <button id="viewer-next" class="btn ghost" data-i18n="next">下一个 →</button>
+  </div>
+
+  <div id="viewer-board" class="board-wrap"></div>
+  <div id="viewer-legend" class="legend"></div>
+</section>
+
+<!-- ===== Interactive screen (Mode B) ===== -->
+<section id="screen-interactive" class="screen">
+  <div class="topbar">
+    <button class="btn ghost" data-back data-i18n="back">← 返回</button>
+    <span class="topbar-title" data-i18n="interactive">互动模式</span>
+    <span id="progress" class="progress"></span>
+  </div>
+
+  <div id="ia-board" class="board-wrap"></div>
+
+  <div id="val-banner"></div>
+
+  <div id="piece-controls" class="piece-controls hidden">
+    <span id="sel-preview" class="sel-preview"></span>
+    <button id="btn-rotate" class="btn mini" data-i18n="rotate">旋转</button>
+    <button id="btn-flip" class="btn mini" data-i18n="flip">翻面</button>
+    <button id="btn-deselect" class="btn mini ghost" data-i18n="deselect">取消选择</button>
+  </div>
+
+  <p class="hint-text" id="ia-help"></p>
+
+  <div id="tray" class="tray"></div>
+
+  <div class="button-row">
+    <button id="btn-undo" class="btn ghost" data-i18n="undo">撤销</button>
+    <button id="btn-hint" class="btn ghost" data-i18n="hint">提示</button>
+    <label class="toggle"><input type="checkbox" id="validate-toggle"> <span data-i18n="liveCheck">实时校验</span></label>
+    <button id="btn-save" class="btn ghost" data-i18n="save">保存</button>
+  </div>
+
+  <div id="win-overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-title" id="win-title" data-i18n="solved">完成！🎉</div>
+      <div id="win-time" class="overlay-sub"></div>
+      <div class="button-row">
+        <button id="win-solutions" class="btn primary" data-i18n="viewAll">查看所有解法</button>
+        <button id="win-new" class="btn ghost" data-i18n="newGame">新游戏</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="solver.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
